@@ -71,3 +71,36 @@ spec:
           - type: string
             string:
               fmt: "%s-sn"
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: status.test.dbResourceId
+        policy:
+          fromFieldPath: Required
+  - base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: PrivateEndpoint
+      spec:
+        forProvider:
+          location: West US 2
+          privateServiceConnection:
+            - isManualConnection: false
+              #name: default
+              subresourceNames: ["sqlServer"]
+          resourceGroupNameSelector:
+            matchControllerRef: true
+          subnetIdSelector:
+            matchControllerRef: true
+    patches:
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.labels[azure.platformref.upbound.io/app]
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.name
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-BADNAME"
+              #fmt: "%s-goodname"
+      - fromFieldPath: status.test.dbResourceId
+        toFieldPath: spec.forProvider.privateServiceConnection[0].privateConnectionResourceId
+        policy:
+          fromFieldPath: Required
