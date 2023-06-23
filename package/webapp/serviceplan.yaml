@@ -1,0 +1,17 @@
+apiVersion: web.azure.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxfunctionappslot
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-linux-func-app.sh
+  labels:
+    testing.upbound.io/example-name: linuxfuncnappslot-sp-us
+  name: linuxfuncnappslot-sp-us
+spec:
+  forProvider:
+    location: North Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        azure.platformref.upbound.io/network-id: ref-azure-network-from-xr
+    skuName: B1

@@ -1,0 +1,19 @@
+apiVersion: web.azure.upbound.io/v1beta1
+kind: LinuxWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-lwa
+  name: linuxwebappslot-lwa2
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        azure.platformref.upbound.io/network-id: ref-azure-network-from-xr
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslot-sp
+    siteConfig:
+      - alwaysOn: false
