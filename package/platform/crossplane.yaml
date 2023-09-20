@@ -1,4 +1,4 @@
-apiVersion: meta.pkg.crossplane.io/v1alpha1
+apiVersion: meta.pkg.crossplane.io/v1
 kind: Configuration
 metadata:
   name: platform-ref-azure
@@ -36,15 +36,9 @@ spec:
   crossplane:
     version: ">=v1.12.1-0"
   dependsOn:
-    - provider: xpkg.upbound.io/upbound/provider-family-azure
-      version: ">=v0.33.0"
-    - provider: xpkg.upbound.io/upbound/provider-azure-containerservice
-      version: ">=v0.33.0"
-    - provider: xpkg.upbound.io/upbound/provider-azure-dbformariadb
-      version: ">=v0.33.0"
-    - provider: xpkg.upbound.io/upbound/provider-azure-dbforpostgresql
-      version: ">=v0.33.0"
-    - provider: xpkg.upbound.io/upbound/provider-azure-network
-      version: ">=v0.33.0"
-    - provider: xpkg.upbound.io/crossplane-contrib/provider-helm
-      version: ">=v0.15.0"
+    - configuration: index.docker.io/ytsarev/platform-ref-azure-cluster
+      version: ">=v0.7.0"
+    - configuration: index.docker.io/ytsarev/platform-ref-azure-database
+      version: ">=v0.7.0"
+    - configuration: index.docker.io/ytsarev/platform-ref-azure-app
+      version: ">=v0.7.0"
